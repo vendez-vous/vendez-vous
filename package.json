@@ -12,7 +12,9 @@
   "dependencies": {
     "express": "^4.16.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vendez-vous/vendez-vous-server.git"
