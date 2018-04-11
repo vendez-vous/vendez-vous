@@ -5,8 +5,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.listen(5108, function() {
-		  console.log('listening on 5108')
+app.listen(80, function() {
+		  console.log('listening on 80')
 		  })
 
 app.get('/', function(req, res) {
