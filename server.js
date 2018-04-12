@@ -18,7 +18,7 @@ var db
 
 MongoClient.connect('mongodb://api:cs252lab6@ds119618.mlab.com:19618/vendez-vous-users', (err, client) => {
 	if (err) return console.log(err)
-	db = client.db('vendez-vous-users') // whatever your database name is
+	db = client.db('vendez-vous-users')
 	console.log('connected to mongodb')
 	app.listen(3702, () => {
 		console.log('listening on 3702')
@@ -26,5 +26,13 @@ MongoClient.connect('mongodb://api:cs252lab6@ds119618.mlab.com:19618/vendez-vous
 	})
 
 app.get('/', function(req, res) {
-	res.send('vendez-vous api - v:1.0')
+	res.send('vendez-vous api')
+	})
+
+app.post('/user-login', (req, res) => {
+	db.collection('users').save(req.body, (err, result) => {
+	if (err) return console.log(err)
+	console.log('saved to database')
+	res.redirect('/')
+		})
 	})
