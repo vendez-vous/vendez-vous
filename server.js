@@ -27,12 +27,38 @@ MongoClient.connect('mongodb://api:cs252lab6@ds119618.mlab.com:19618/vendez-vous
 
 app.get('/', function(req, res) {
 	res.send('vendez-vous api')
-	})
+	});
 
 app.post('/user-login', (req, res) => {
-	db.collection('users').save(req.body, (err, result) => {
-	if (err) return console.log(err)
-	console.log('saved to database')
-	res.redirect('/')
-		})
-	})
+	console.log(req);
+	var user = {
+		"_id": req.body.id,
+		"user_name": req.body.name,
+		"picture": req.picture.data.url,
+		"location": {},
+		"bio": "",
+		"interests": "",
+		"matches": []
+	};
+	// check if exists first 
+	db.collection('users').findOne({"_id": user._id}, function (err, result) {
+			if(err) console.log(err)
+			else {
+				if (result) {
+					res.send("user exists!");
+					}
+				else {
+					// add to database
+					db.collection('users').save(user, (err, result) => {
+					if (err) console.log(err)
+					else {
+						console.log('saved to database')
+						res.send("user logged in!")
+						}
+					})
+				})
+			}
+		}
+	});
+
+
