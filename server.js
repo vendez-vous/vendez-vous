@@ -103,9 +103,13 @@ app.post('/update-profile', (req, res) => {
 });
 
 app.post('/send-location', (req, res) => {
+  // console.log(req);
   var user = {
     "_id": req.body.id,
-    "location": req.body.position
+    "location": {
+      "latitude": req.body.latitude,
+      "longitude": req.body.longitude
+    }
   };
   // check if exists
   db.collection('users').findOne({
@@ -192,44 +196,45 @@ app.get('/get-nearby', (req, res) => {
         // TODO get nearby users and if the 2 users have matched
         // console.log(result)
         var users_list = []
-        db.collection('users').find().forEach(function(doc) {
-          // console.log(doc)
-          if (isNearby(doc, result) /*&& doc._id != result._id*/ ) {
-            console.log(doc)
-            var toSend = {
-              "id": doc._id,
-              "user_name": doc.user_name,
-              "picture": doc.picture,
-              "bio": doc.bio,
-              "interests": doc.interests,
-              "match": false
-            };
-            if (result.matches.includes(doc._id) && doc.matches.includes(result._id)) {
-              toSend.match = true
-            }
+        db.collection('users').find({}).toArray(function(err1, doc) {
+          console.log(doc)
+          for (i = 0; i < doc.length; i++) {
+            if (doc[i]._id != result._id && isNearby(doc[i], result)) {
+              // console.log(doc)
+              var toSend = {
+                "id": doc[i]._id,
+                "user_name": doc[i].user_name,
+                "picture": doc[i].picture,
+                "bio": doc[i].bio,
+                "interests": doc[i].interests,
+                "match": false
+              };
+              if (result.matches.includes(doc[i]._id) && doc[i].matches.includes(result._id)) {
+                toSend.match = true
+              }
 
-            users_list.push(toSend);
+              users_list.push(toSend);
+            }
+            console.log('response sent');
+            console.log('list len: ', users_list.length)
+          }
+          if (users_list.length > 0) {
+            res.send(users_list);
+          } else {
+            res.send('sorry nobody\'s using the app near you')
           }
         });
-        console.log('response sent');
-        if (users_list.length > 0) {
-          res.send(users_list);
-        } else {
-          res.send('sorry nobody\'s using the app near you')
-        }
+
       } else {
-        res.send("this user does not exist!");
         console.log("user does not exist in the database");
+        res.send("this user does not exist!");
       }
     }
   });
 });
 
 function isNearby(user1, user2) {
-  console.log(user1.location);
-  console.log(user2.location);
-  console.log(distance(parseFloat(user1.location.latitude), parseFloat(user1.location.longitude), parseFloat(user2.location.latitude), parseFloat(user2.location.longitude)));
-  if (distance(user1.location.latitude, user1.location.longitude, user2.location.latitude, user2.location.longitude) <= 5) { // 5 mile radius
+  if (distance(parseFloat(user1.location.latitude), parseFloat(user1.location.longitude), parseFloat(user2.location.latitude), parseFloat(user2.location.longitude)) <= 5) { // 5 mile radius
     return true
   }
   return false
