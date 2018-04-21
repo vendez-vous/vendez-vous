@@ -204,7 +204,7 @@ app.get('/get-nearby', (req, res) => {
               "interests": doc.interests,
               "match": false
             };
-            if (result.matches.includes(doc._id)) {
+            if (result.matches.includes(doc._id) && doc.matches.includes(result._id)) {
               toSend.match = true
             }
 
@@ -226,6 +226,9 @@ app.get('/get-nearby', (req, res) => {
 });
 
 function isNearby(user1, user2) {
+  console.log(user1.location);
+  console.log(user2.location);
+  console.log(distance(parseFloat(user1.location.latitude), parseFloat(user1.location.longitude), parseFloat(user2.location.latitude), parseFloat(user2.location.longitude)));
   if (distance(user1.location.latitude, user1.location.longitude, user2.location.latitude, user2.location.longitude) <= 5) { // 5 mile radius
     return true
   }
