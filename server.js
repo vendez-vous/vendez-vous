@@ -35,7 +35,7 @@ app.post('/user-login', (req, res) => {
   var user = {
     "_id": req.body.id,
     "user_name": req.body.name,
-    "picture": req.body.picture,
+    "picture": req.body.picture /*.data.url*/ ,
     "location": {},
     "bio": "",
     "interests": "",
@@ -102,6 +102,42 @@ app.post('/update-profile', (req, res) => {
   });
 });
 
+app.post('/send-location', (req, res) => {
+  var user = {
+    "_id": req.body.id,
+    "location": req.body.position
+  };
+  // check if exists
+  db.collection('users').findOne({
+    "_id": user._id
+  }, function(err, result) {
+    if (err) console.log(err);
+    else {
+      if (result) {
+        // update database
+        db.collection('users').update({
+          "_id": user._id
+        }, {
+          $set: {
+            "location": user.location
+          }
+        }, {
+          w: 1
+        }, (err, result) => {
+          if (err) console.log(err);
+          else {
+            console.log('updated database');
+            res.send("user location updated");
+          }
+        });
+      } else {
+        res.send("user does not exist!");
+        console.log("user does not exist in the database");
+      }
+    }
+  });
+});
+
 app.post('/like', (req, res) => {
   var user = {
     "_id": req.body.id,
@@ -141,9 +177,10 @@ app.post('/like', (req, res) => {
   });
 });
 
-app.get('/nearby', (req, res) => {
+app.get('/get-nearby', (req, res) => {
+  // console.log(req);
   var user = {
-    "_id": req.body.id
+    "_id": req.headers.id
   };
   // check if exists
   db.collection('users').findOne({
@@ -152,7 +189,34 @@ app.get('/nearby', (req, res) => {
     if (err) console.log(err);
     else {
       if (result) {
-        // TODO get nearby users and if a user has liked current user
+        // TODO get nearby users and if the 2 users have matched
+        // console.log(result)
+        var users_list = []
+        db.collection('users').find().forEach(function(doc) {
+          // console.log(doc)
+          if (isNearby(doc, result) /*&& doc._id != result._id*/ ) {
+            console.log(doc)
+            var toSend = {
+              "id": doc._id,
+              "user_name": doc.user_name,
+              "picture": doc.picture,
+              "bio": doc.bio,
+              "interests": doc.interests,
+              "match": false
+            };
+            if (result.matches.includes(doc._id)) {
+              toSend.match = true
+            }
+
+            users_list.push(toSend);
+          }
+        });
+        console.log('response sent');
+        if (users_list.length > 0) {
+          res.send(users_list);
+        } else {
+          res.send('sorry nobody\'s using the app near you')
+        }
       } else {
         res.send("this user does not exist!");
         console.log("user does not exist in the database");
@@ -162,22 +226,26 @@ app.get('/nearby', (req, res) => {
 });
 
 function isNearby(user1, user2) {
-	if(distance(user1.location.latitude, user1.longitude, user2.latitude, user2.longitude) <= 5) { // 5 mile radius
-		return true
-	}
-	return false
+  if (distance(user1.location.latitude, user1.location.longitude, user2.location.latitude, user2.location.longitude) <= 5) { // 5 mile radius
+    return true
+  }
+  return false
 }
 
 function distance(lat1, lon1, lat2, lon2, unit) {
-	var radlat1 = Math.PI * lat1/180
-	var radlat2 = Math.PI * lat2/180
-	var theta = lon1-lon2
-	var radtheta = Math.PI * theta/180
-	var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-	dist = Math.acos(dist)
-	dist = dist * 180/Math.PI
-	dist = dist * 60 * 1.1515
-	if (unit=="K") { dist = dist * 1.609344 }
-	if (unit=="N") { dist = dist * 0.8684 }
-	return dist
+  var radlat1 = Math.PI * lat1 / 180
+  var radlat2 = Math.PI * lat2 / 180
+  var theta = lon1 - lon2
+  var radtheta = Math.PI * theta / 180
+  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  dist = Math.acos(dist)
+  dist = dist * 180 / Math.PI
+  dist = dist * 60 * 1.1515
+  if (unit == "K") {
+    dist = dist * 1.609344
+  }
+  if (unit == "N") {
+    dist = dist * 0.8684
+  }
+  return dist
 }
