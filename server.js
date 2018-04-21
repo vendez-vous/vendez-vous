@@ -1,6 +1,6 @@
-/** 
+/**
  *	vendez-vous api for backend
- * 
+ *
  * @author: parth_shel
  * @version: v:1.0 Apr 11, 2018
 **/
@@ -40,7 +40,7 @@ app.post('/user-login', (req, res) => {
 		"interests": "",
 		"matches": []
 	};
-	// check if exists first 
+	// check if exists first
 	db.collection('users').findOne({"_id": user._id}, function (err, result) {
 			if(err) console.log(err)
 			else {
@@ -55,10 +55,8 @@ app.post('/user-login', (req, res) => {
 						console.log('saved to database')
 						res.send("user logged in!")
 						}
-					})
-				})
+					});
+				}
 			}
-		}
-	});
-
-
+		});
+});
