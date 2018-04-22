@@ -7,6 +7,7 @@
 
 console.log('vendez-vous server started')
 
+var path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
@@ -26,6 +27,8 @@ MongoClient.connect('mongodb://api:cs252lab6@ds119618.mlab.com:19618/vendez-vous
     console.log('listening on 3702')
   })
 })
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   res.send('vendez-vous api')
@@ -186,6 +189,22 @@ app.get('/get-nearby', (req, res) => {
   var user = {
     "_id": req.headers.id
   };
+  var range;
+  var unit;
+  // input sanitization
+  if (req.headers.range) {
+    range = parseInt(req.headers.range)
+  }
+  if (req.headers.unit) {
+    unit = req.headers.unit
+  }
+  // defaults
+  if (unit != "M" || unit != "K") {
+    unit = "M"
+  }
+  if (!(range > 0 && range < 15)) {
+    range = 5
+  }
   // check if exists
   db.collection('users').findOne({
     "_id": user._id
@@ -197,9 +216,9 @@ app.get('/get-nearby', (req, res) => {
         // console.log(result)
         var users_list = []
         db.collection('users').find({}).toArray(function(err1, doc) {
-          console.log(doc)
+          // console.log(doc)
           for (i = 0; i < doc.length; i++) {
-            if (doc[i]._id != result._id && isNearby(doc[i], result)) {
+            if (doc[i]._id != result._id && isNearby(doc[i], result, range, unit)) {
               // console.log(doc)
               var toSend = {
                 "id": doc[i]._id,
@@ -216,12 +235,11 @@ app.get('/get-nearby', (req, res) => {
               users_list.push(toSend);
             }
             console.log('response sent');
-            console.log('list len: ', users_list.length)
           }
           if (users_list.length > 0) {
             res.send(users_list);
           } else {
-            res.send('sorry nobody\'s using the app near you')
+            res.send('sorry nobody\'s using the app near you');
           }
         });
 
@@ -233,8 +251,8 @@ app.get('/get-nearby', (req, res) => {
   });
 });
 
-function isNearby(user1, user2) {
-  if (distance(parseFloat(user1.location.latitude), parseFloat(user1.location.longitude), parseFloat(user2.location.latitude), parseFloat(user2.location.longitude)) <= 5) { // 5 mile radius
+function isNearby(user1, user2, range, unit) {
+  if (distance(parseFloat(user1.location.latitude), parseFloat(user1.location.longitude), parseFloat(user2.location.latitude), parseFloat(user2.location.longitude), unit) <= parseInt(range)) { // 5 mile radius
     return true
   }
   return false

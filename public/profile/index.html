@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>VendezVous</title>
+	<base href="/">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- meta tag for favicon-->
+	<link rel="shortcut icon" href="/favicon.png">
+	<!-- meta tag to make the website Search Engine friendly-->
+	<meta name="HandheldFriendly" content="True">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<!-- Adding Google Font API -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
+	<style type="text/css">
+		body {
+			background-image: url("/profile/assets/bagel.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.heading h1 {
+			font-size: 64px;
+			font-family: 'Indie Flower', sans-serif;
+			text-align: center;
+			background-color: rgb(124, 124, 224);
+			color: white;
+			margin: 0;
+		}
+
+		.subheadings {
+			width: 500px;
+			margin: 30px auto 0 auto;
+			border: 5px solid #000000;
+			padding: 20px;
+		}
+
+		textarea {
+			background-color: transparent;
+			border-color: black;
+			/* background-color: black; */
+		}
+
+		input {
+			background-color: transparent;
+			border-color: black;
+		}
+
+		.buttons {
+			padding-left: 5px;
+		}
+
+		.buttons button {
+			background-color: transparent;
+			border-color: black;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="heading">
+		<h1>Profile</h1>
+	</div>
+	<br>
+	<div class="buttons">
+		<button onclick="location.href='https://vendez-vous.github.io/nearby'" type="button">Users Nearby</button>
+		<button onclick="javascript:logout();">Logout from Facebook</button>
+	</div>
+
+
+	<div class="subheadings">
+		<form action="/action_page.php">
+			<div class="name">
+				<h2>Name</h2>
+				<input type="text" name="name">
+				<br><br>
+			</div>
+
+			<div class="interests">
+				<h2>Interests</h2>
+				<textarea name="interests" rows="3" cols="54"></textarea>
+				<br><br>
+			</div>
+
+			<div class="about">
+				<h2>About</h2>
+				<!-- <input type="text" name="about"> -->
+				<textarea name="about" rows="6" cols="54"></textarea>
+				<br><br>
+				<input type="submit" value="Save">
+			</div>
+		</form>
+	</div>
+
+	<!-- <button onclick="handleSessionResponse(response)" type="button">Logout</button> -->
+
+	<!-- <a href="/delete" onclick="FB.logout();">Logout</a> Use it for the delte account button, here /logout is a function which deletes the user's account -->
+
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: 203968780201183,
+				cookie: true, // enable cookies to allow the server to access
+				// the session
+				xfbml: true, // parse social plugins on this page
+				version: 'v2.12', // use graph api version 2.8
+				autoLogAppEvents: true,
+				// status 	 : true /* reduces time wasted in checking if the user is logged in or not */
+			});
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function logout() {
+			FB.getLoginStatus(function(response) {
+				if (response && response.status === 'connected') {
+					FB.logout(function(response) {
+						// document.location.reload();
+						window.location = "https://vendez-vous.github.io";
+					});
+				}
+			});
+		}
+	</script>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+
+</html>

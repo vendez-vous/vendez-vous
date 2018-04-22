@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>VendezVous</title>
+	<base href="/">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- meta tag for favicon-->
+	<link rel="shortcut icon" href="/favicon.png">
+	<!-- meta tag to make the website Search Engine friendly-->
+	<meta name="HandheldFriendly" content="True">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<!-- Adding Google Font API -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
+	<style type="text/css">
+		body {
+			background-image: url("nearby/assets/background.jpeg");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.heading h1 {
+			font-size: 64px;
+			font-family: 'Indie Flower', sans-serif;
+			text-align: center;
+			background-color: rgb(124, 124, 224);
+			color: white;
+			margin: 0;
+		}
+
+		button {
+			float: right;
+		}
+
+		.person {
+			padding: 30px 0 40px;
+			text-align: center;
+			background: white;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.person .pic {
+			display: inline-block;
+			width: 130px;
+			height: 130px;
+			margin-bottom: 50px;
+			z-index: 1;
+			position: relative;
+		}
+
+		.person .pic::before {
+			content: "";
+			width: 100%;
+			position: absolute;
+			bottom: 135%;
+			right: 0;
+			left: 0;
+			background: rgb(124, 124, 224);
+			transform: scale(3);
+			transition: all 0.3s linear 0s;
+		}
+
+		.person:hover .pic::before {
+			height: 100%;
+		}
+
+		.person:hover .pic::after {
+			content: "";
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			background: rgb(124, 124, 224);
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+
+		.person .pic img {
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			transform: scale(1);
+			transition: all 0.9s ease 0s;
+		}
+
+		.person:hover .pic img {
+			box-shadow: 0 0 0 14px #f7f5ec;
+			transform: scale(0.7);
+		}
+
+		.person .content {
+			margin-bottom: 30px;
+		}
+
+		.person .name {
+			font-size: 22px;
+			font-weight: 700;
+			color: #4e5052;
+			letter-spacing: 1px;
+			text-transform: capitalize;
+			margin-bottom: 5px;
+		}
+
+		.person .interests {
+			display: block;
+			font-size: 15px;
+			color: #4e5052;
+			text-transform: capitalize;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="heading">
+		<h1>Nearby users available to meet</h1>
+	</div>
+
+	<button onclick="location.href='https://vendez-vous.github.io/profile'" type="button">Profile</button>
+	<br><br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-6">
+				<div class="person">
+					<div class="pic">
+						<img src="http://images5.fanpop.com/image/photos/31800000/Robert-Downey-jr-robert-downey-jr-31831924-333-500.jpg" alt="Profile Picture">
+					</div>
+					<div class="content">
+						<h3 class="name">Insert name here</h3>
+						<span class="interests">Interests</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="person">
+					<div class="pic">
+						<img src="/nearby/addy.jpg" alt="Profile Picture">
+					</div>
+					<div class="content">
+						<h3 class="name">Insert name here</h3>
+						<span class="interests">Interests</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="person">
+					<div class="pic">
+						<img src="response.picture.data.url" alt="Profile Picture">
+					</div>
+					<div class="content">
+						<h3 class="name">Insert name here</h3>
+						<span class="interests">Interests</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="person">
+					<div class="pic">
+						<img src="response.picture.data.url" alt="Profile Picture">
+					</div>
+					<div class="content">
+						<h3 class="name">Insert name here</h3>
+						<span class="interests">Interests</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var startPos;
+			var geoOptions = {
+				timeout: 10 * 1000
+			}
+
+			var geoSuccess = function(position) {
+				startPos = position;
+				document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+				document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+			};
+			var geoError = function(error) {
+				console.log('Error occurred. Error code: ' + error.code);
+				// error.code can be:
+				//   0: unknown error
+				//   1: permission denied
+				//   2: position unavailable (error response from location provider)
+				//   3: timed out
+			};
+
+			navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+		};
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: 203968780201183,
+				cookie: true, // enable cookies to allow the server to access
+				// the session
+				xfbml: true, // parse social plugins on this page
+				version: 'v2.12', // use graph api version 2.8
+				autoLogAppEvents: true,
+				// status 	 : true /* reduces time wasted in checking if the user is logged in or not */
+			});
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function getInfo() {
+			FB.api('/me', 'GET', {
+				fields: 'name,id,picture.width(150).height(150)'
+			}, function(response) {
+				document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
+			});
+		}
+	</script>
+
+	<!-- Ocdptional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+
+</html>
