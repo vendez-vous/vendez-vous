@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<style type="text/css">
 		body {
 			background-image: url("/assets/background.jpg");
@@ -128,7 +129,7 @@
 				fields: 'name,id,picture.width(150).height(150)'
 			}, function(response) {
 				document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
-				$.post("api.vendez-vous.ml/user-login", response, function(data) {
+				$.post("/user-login", response, function(data) {
 					console.log(data);
 					console.log("HERE!!!");
 				}, "json");
