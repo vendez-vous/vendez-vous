@@ -72,7 +72,6 @@
 			if (response.status === 'connected') {
 
 				var accessToken = response.authResponse.accessToken;
-				var userID = response.authResponse.userID;
 				// Logged into your app and Facebook.
 				testAPI();
 				getInfo(userID);
