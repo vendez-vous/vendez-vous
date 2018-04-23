@@ -233,7 +233,7 @@
 			FB.api('/me', 'GET', {
 				fields: 'id'
 			}, function(response) {
-				user_id = response.id;
+				window.user_id = response.id;
 			});
 		}
 	</script>

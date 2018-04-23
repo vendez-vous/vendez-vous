@@ -135,7 +135,6 @@
 				var toSend = {
 					"id": response.id,
 					"name": response.name,
-					"userID": userID,
 					"picture": response.picture.data.url
 				}
 				$.post("/user-login", toSend, function(data) {
