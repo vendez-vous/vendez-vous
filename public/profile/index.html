@@ -37,11 +37,8 @@
 			padding: 20px;
 		}
 
-		.subheadings .name {
+		.subheadings .name img {
 			display: inline;
-		}
-
-		.subheadings .name .profilepic {
 			width: 100px;
 			height: 100px;
 			margin-left: 100px;
@@ -81,8 +78,8 @@
 
 	<div class="subheadings">
 		<!-- <form action="/update-profile"> -->
-		<h2>Name</h2>
 		<div class="name">
+			<h2>Name</h2>
 			<input type="text" id="name" readonly>
 			<div id="profilepic"></div>
 			<br><br>
@@ -119,6 +116,7 @@
 			getInfo();
 		} else {
 			// The person is not logged into your app or we are unable to tell.
+			window.top.location = "/";
 			document.getElementById('name').value = 'your name displayed here';
 		}
 	}
