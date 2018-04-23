@@ -110,6 +110,31 @@ app.post('/update-profile', (req, res) => {
   });
 });
 
+app.get('/get-profile', (req, res) => {
+  var user = {
+    "_id": req.headers.id
+  };
+  // check if exists
+  db.collection('users').findOne({
+    "_id": user._id
+  }, function(err, result) {
+    if (err) console.log(err);
+    else {
+      if (result) {
+        var toSend = {
+          "_id": result._id,
+          "bio": result.bio,
+          "interests": result.interests
+        }
+        res.send(toSend);
+      } else {
+        res.send("user does not exist!");
+        console.log("user does not exist in the database");
+      }
+    }
+  });
+});
+
 app.post('/send-location', (req, res) => {
   console.log(req.body);
   var user = {
