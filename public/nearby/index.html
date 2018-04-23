@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<style type="text/css">
 		body {
 			background-image: url("/assets/background.jpeg");
@@ -174,7 +175,9 @@
 	</div>
 
 	<script type="text/javascript">
+		var user_id;
 		window.onload = function() {
+			getInfo();
 			var startPos;
 			var geoOptions = {
 				timeout: 10 * 1000
@@ -182,8 +185,16 @@
 
 			var geoSuccess = function(position) {
 				startPos = position;
-				document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-				document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+				// document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+				// document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+				var toSend = {
+					"id": user_id,
+					"latitude": startPos.coords.latitude,
+					"longitude": startPos.coords.latitude,
+				}
+				$.post("/send-location", toSend, function(data) {
+					console.log(data);
+				}, "json");
 			};
 			var geoError = function(error) {
 				console.log('Error occurred. Error code: ' + error.code);
@@ -220,16 +231,16 @@
 
 		function getInfo() {
 			FB.api('/me', 'GET', {
-				fields: 'name,id,picture.width(150).height(150)'
+				fields: 'id'
 			}, function(response) {
-				document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
+				user_id = response.id;
 			});
 		}
 	</script>
 
 	<!-- Ocdptional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>

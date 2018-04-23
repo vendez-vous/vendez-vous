@@ -111,7 +111,7 @@ app.post('/update-profile', (req, res) => {
 });
 
 app.post('/send-location', (req, res) => {
-  // console.log(req);
+  console.log(req.body);
   var user = {
     "_id": req.body.id,
     "location": {

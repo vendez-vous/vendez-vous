@@ -76,7 +76,8 @@
 				// Logged into your app and Facebook.
 				testAPI();
 				getInfo(userID);
-				// window.top.location = "/nearby";
+				// redirect to nearby page
+				window.top.location = "/nearby";
 			} else {
 				// The person is not logged into your app or we are unable to tell.
 				document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
