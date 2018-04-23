@@ -70,11 +70,13 @@
 			console.log(response);
 
 			if (response.status === 'connected') {
+
+				var accessToken = response.authResponse.accessToken;
+				var userID = response.authResponse.userID;
 				// Logged into your app and Facebook.
 				testAPI();
-				getInfo();
+				getInfo(userID);
 				// window.top.location = "/nearby";
-				var accessToken = response.authResponse.accessToken;
 			} else {
 				// The person is not logged into your app or we are unable to tell.
 				document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
@@ -118,13 +120,13 @@
 		function testAPI() {
 			// console.log('Welcome!  Fetching your information.... ');
 			FB.api('/me', function(response) {
-				// console.log(response);
+				console.log(response);
 				// console.log('Successful login for: ' + response.name + " " + response.id + " " + response.last_name);
 				// document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 			});
 		}
 
-		function getInfo() {
+		function getInfo(userID) {
 			FB.api('/me', 'GET', {
 				fields: 'name,id,picture.width(150).height(150)'
 			}, function(response) {
@@ -132,11 +134,11 @@
 				var toSend = {
 					"id": response.id,
 					"name": response.name,
+					"userID": userID,
 					"picture": response.picture.data.url
 				}
 				$.post("/user-login", toSend, function(data) {
 					console.log(data);
-					console.log("HERE!!!");
 				}, "json");
 			});
 		}
