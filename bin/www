@@ -21,7 +21,7 @@ var server = https.createServer(options, app);
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3702');
+var port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**
