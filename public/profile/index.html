@@ -80,8 +80,8 @@
 		<!-- <form action="/update-profile"> -->
 		<div class="name">
 			<h2>Name</h2>
-			<input type="text" id="name">
-			<img src="/favicon.png" alt="profile picture">
+			<input type="text" id="name" readonly>
+			<div id="profilepic"></div>
 			<br><br>
 		</div>
 
@@ -173,10 +173,11 @@
 
 		function getInfo(userID) {
 			FB.api('/me', 'GET', {
-				fields: 'name'
+				fields: 'name,picture.width(150).height(150)'
 			}, function(response) {
 				console.log("setting the name");
 				document.getElementById("name").value = response.name;
+				document.getElementById("profilepic").innerHTML = "<img src='" + response.picture.data.url + "'>"
 			});
 		}
 	</script>
