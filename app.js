@@ -15,7 +15,9 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -43,7 +45,7 @@ app.post('/user-login', (req, res) => {
     "_id": req.body.id,
     "user_name": req.body.name,
     // "user_id": req.body.userID,
-    "picture": req.body.picture/*.data.url*/,
+    "picture": req.body.picture /*.data.url*/ ,
     "location": {},
     "bio": "",
     "interests": "",
