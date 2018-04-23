@@ -42,6 +42,7 @@ app.post('/user-login', (req, res) => {
   var user = {
     "_id": req.body.id,
     "user_name": req.body.name,
+    "user_id": req.body.userID,
     "picture": req.body.picture/*.data.url*/,
     "location": {},
     "bio": "",

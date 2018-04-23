@@ -73,7 +73,7 @@
 				// Logged into your app and Facebook.
 				testAPI();
 				getInfo();
-				window.top.location = "/nearby";
+				// window.top.location = "/nearby";
 				var accessToken = response.authResponse.accessToken;
 			} else {
 				// The person is not logged into your app or we are unable to tell.
@@ -118,6 +118,7 @@
 		function testAPI() {
 			console.log('Welcome!  Fetching your information.... ');
 			FB.api('/me', function(response) {
+				console.log(response);
 				console.log('Successful login for: ' + response.name + " " + response.id + " " + response.last_name);
 				response.name + response.id + response.last_name
 				document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
@@ -129,7 +130,12 @@
 				fields: 'name,id,picture.width(150).height(150)'
 			}, function(response) {
 				document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
-				$.post("/user-login", response, function(data) {
+				var toSend = {
+					"id": response.id,
+					"name": response.name,
+					"picture": response.picture.data.url
+				}
+				$.post("/user-login", toSend, function(data) {
 					console.log(data);
 					console.log("HERE!!!");
 				}, "json");
