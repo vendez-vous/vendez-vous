@@ -77,7 +77,7 @@
 				var accessToken = response.authResponse.accessToken;
 			} else {
 				// The person is not logged into your app or we are unable to tell.
-				document.getElementById('status').innerHTML = 'Please login through your Facebook account';
+				document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
 			}
 		}
 
@@ -116,12 +116,11 @@
 		// Here we run a very simple test of the Graph API after login is
 		// successful.  See statusChangeCallback() for when this call is made.
 		function testAPI() {
-			console.log('Welcome!  Fetching your information.... ');
+			// console.log('Welcome!  Fetching your information.... ');
 			FB.api('/me', function(response) {
-				console.log(response);
-				console.log('Successful login for: ' + response.name + " " + response.id + " " + response.last_name);
-				response.name + response.id + response.last_name
-				document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+				// console.log(response);
+				// console.log('Successful login for: ' + response.name + " " + response.id + " " + response.last_name);
+				// document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 			});
 		}
 
@@ -129,7 +128,7 @@
 			FB.api('/me', 'GET', {
 				fields: 'name,id,picture.width(150).height(150)'
 			}, function(response) {
-				document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
+				// document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
 				var toSend = {
 					"id": response.id,
 					"name": response.name,
