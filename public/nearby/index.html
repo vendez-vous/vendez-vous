@@ -13,6 +13,7 @@
 	<!-- link for favicon-->
 	<link rel="shortcut icon" href="/favicon.png">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
@@ -117,6 +118,39 @@
 			color: #4e5052;
 			text-transform: capitalize;
 		}
+
+		.person .social {
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			background: black;
+			position: absolute;
+			bottom: -100px;
+			left: 0;
+			transition: all 0.5s ease 0s;
+		}
+
+		.person:hover .social {
+			bottom: 0;
+		}
+
+		.person .social li {
+			display: inline-block;
+		}
+
+		.person .social li a {
+			display: block;
+			padding: 10px;
+			color: white;
+			font-size: 17px;
+			transition: all 0.3s ease 0s;
+		}
+
+		.person .social li a:hover {
+			color: black;
+			background: #f7f5ec;
+			text-decoration: none;
+		}
 	</style>
 </head>
 
@@ -142,6 +176,15 @@
 						<h3 class="name">Insert name here</h3>
 						<span class="interests">Interests</span>
 					</div>
+					<ul class="social">
+				    <li>
+				      <a href="#"><i class="far fa-thumbs-up"></i></a>
+				    </li>
+
+				    <li>
+				      <a href="#"><i class="far fa-heart"></i></a>
+				    </li>
+				  </ul>
 				</div>
 			</div>
 
