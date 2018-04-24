@@ -5,12 +5,13 @@
 	<title>VendezVous</title>
 	<base href="/">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- meta tag to make the website Search Engine friendly-->
 	<meta name="HandheldFriendly" content="True">
 	<!-- meta tag for favicon-->
 	<link rel="shortcut icon" href="/favicon.png">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
@@ -20,6 +21,7 @@
 			background-image: url("/assets/bagel.jpg");
 			background-repeat: no-repeat;
 			background-size: cover;
+			background-attachment: fixed;
 		}
 
 		.heading h1 {
@@ -63,11 +65,6 @@
 		.buttons {
 			padding-left: 5px;
 		}
-
-		/* button {
-			background-color: transparent;
-			border-color: black;
-		} */
 	</style>
 </head>
 
@@ -92,14 +89,14 @@
 
 		<div class="interests">
 			<h2>Interests</h2>
-			<textarea id="interests" rows="3" maxlength="64"></textarea>
+			<textarea id="interests" rows="3" maxlength="64" spellcheck="true"></textarea>
 			<br><br>
 		</div>
 
 		<div class="about">
 			<h2>About</h2>
 			<!-- <input type="text" name="about"> -->
-			<textarea id="about" rows="6" maxlength="128"></textarea>
+			<textarea id="about" rows="6" maxlength="128" spellcheck="true"></textarea>
 			<br><br>
 		</div>
 

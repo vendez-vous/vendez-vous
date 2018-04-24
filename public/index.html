@@ -5,12 +5,12 @@
 	<title>VendezVous</title>
 	<base href="/">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- meta tag to make the website Search Engine friendly-->
 	<meta name="HandheldFriendly" content="True">
-	<meta name="description=" content="Vendez Vous - The app that lets you network over meals, based on your conversation interests." />
+	<meta name="description=" content="VendezVous - The app that lets you network over meals, based on your conversation interests." />
 	<meta name="keywords" content="vendezvous, meals, tinder, network, interests, conversation" />
-	<meta property="og:title" content="Vendez Vous" />
+	<meta property="og:title" content="VendezVous" />
 	<meta property="og:url" content="https://vendez-vous.ml" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="/favicon.ico" />
@@ -28,6 +28,7 @@
 			background-image: url("/assets/first.jpg");
 			background-repeat: no-repeat;
 			background-size: cover;
+			background-attachment: fixed;
 		}
 
 		.heading h1 {
@@ -79,7 +80,6 @@
 			console.log(response);
 
 			if (response.status === 'connected') {
-
 				var accessToken = response.authResponse.accessToken;
 				// Logged into your app and Facebook.
 				testAPI();

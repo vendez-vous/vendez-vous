@@ -5,7 +5,7 @@
 	<title>VendezVous</title>
 	<base href="/">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- meta tag to make the website Search Engine friendly-->
 	<meta name="HandheldFriendly" content="True">
 	<!-- meta tag to refresh page after every 30 seconds -->
@@ -14,6 +14,7 @@
 	<link rel="shortcut icon" href="/favicon.png">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
@@ -34,6 +35,10 @@
 			background-color: black;
 			color: white;
 			margin: 0;
+		}
+
+		.row {
+			height: 531px;
 		}
 
 		.buttons {
@@ -174,7 +179,7 @@
 	<br><br>
 
 	<div class="container">
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-3 col-sm-6">
 				<div class="person">
 					<div class="pic">
@@ -197,23 +202,16 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
-	<div class="testcontainer"></div>
-
 	<script type="text/javascript">
-		/*window.onload = function {
-
-					};*/
-
 		// This is called with the results from from FB.getLoginStatus().
 		function statusChangeCallback(response) {
 			console.log('statusChangeCallback');
 			console.log(response);
 
 			if (response.status === 'connected') {
-
 				var accessToken = response.authResponse.accessToken;
 				// Logged into your app and Facebook.
 				getInfo();
@@ -273,10 +271,12 @@
 						"latitude": startPos.coords.latitude,
 						"longitude": startPos.coords.latitude,
 					}
+
 					$.post("/send-location", toSend, function(data) {
 						console.log(data);
 					}, "json");
 				};
+
 				var geoError = function(error) {
 					console.log('Error occurred. Error code: ' + error.code);
 					// error.code can be:
@@ -285,6 +285,7 @@
 					//   2: position unavailable (error response from location provider)
 					//   3: timed out
 				};
+
 				navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 
 				// get nearby users
