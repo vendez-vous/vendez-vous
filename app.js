@@ -272,7 +272,8 @@ app.get('/get-nearby', (req, res) => {
           if (users_list.length > 0) {
             res.send(users_list);
           } else {
-            res.send('sorry nobody\'s using the app near you');
+            // res.send('sorry nobody\'s using the app near you');
+            res.send(users_list);
           }
         });
 
