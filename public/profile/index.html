@@ -42,6 +42,7 @@
 			width: 100px;
 			height: 100px;
 			margin-left: 100px;
+			border-color: black;
 		}
 
 		textarea {
@@ -80,8 +81,9 @@
 		<!-- <form action="/update-profile"> -->
 		<div class="name">
 			<h2>Name</h2>
-			<input type="text" id="name" readonly>
-			<div id="profilepic"></div>
+			<div id="profilepic">
+				<input type="text" id="name" readonly>
+			</div>
 			<br><br>
 		</div>
 
@@ -119,7 +121,6 @@
 			window.top.location = "/";
 			document.getElementById('name').value = 'your name displayed here';
 		}
-	}
 
 		window.fbAsyncInit = function() {
 			FB.init({
