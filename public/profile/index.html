@@ -178,7 +178,7 @@
 			}, function(response) {
 				// console.log("setting the name");
 				document.getElementById("name").value = response.name;
-				document.getElementById("profilepic").innerHTML = "<img src='" + response.picture.data.url + "' class="img-thumbnail">";
+				document.getElementById("profilepic").innerHTML = "<img src='" + response.picture.data.url + "' class="img-thumbnail">"
 				var toSend = {
 					"id": response.id
 				}
