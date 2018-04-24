@@ -32,16 +32,18 @@
 
 		.subheadings {
 			width: 500px;
-			margin: 30px auto 0 auto;
+			margin: auto auto 0 auto;
 			border: 5px solid #000000;
 			padding: 20px;
 		}
 
 		.subheadings .name img {
 			display: inline;
-			width: 100px;
-			height: 100px;
-			margin-left: 100px;
+			float:right;
+			width: 130px;
+			height: 130px;
+			/* margin-left: 100px; */
+			border: 10px;
 			border-color: black;
 		}
 
@@ -79,10 +81,9 @@
 	<div class="subheadings">
 		<!-- <form action="/update-profile"> -->
 		<div class="name">
+			<div id="profilepic"></div>
 			<h2>Name</h2>
-			<div id="profilepic">
-				<input type="text" id="name" readonly>
-			</div>
+			<input type="text" id="name-textbox" readonly>
 			<br><br>
 		</div>
 
@@ -178,8 +179,8 @@
 				fields: 'id,name,picture.width(150).height(150)'
 			}, function(response) {
 				// console.log("setting the name");
-				document.getElementById("name").value = response.name;
-				document.getElementById("profilepic").innerHTML = "<img src='" + response.picture.data.url + "' class=\"img-thumbnail\">";
+				document.getElementById("name-textbox").value = response.name;
+				document.getElementById("profilepic").innerHTML = "<img src='" + response.picture.data.url + "'>";
 				var toSend = {
 					"id": response.id
 				}
