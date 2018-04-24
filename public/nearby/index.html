@@ -226,92 +226,110 @@
 		</div>
 	</div>
 
+	<div class="testcontainer"></div>
+
 	<script type="text/javascript">
-	/*window.onload = function {
+		/*window.onload = function {
 
-	};*/
+			};*/
 
-	// This is called with the results from from FB.getLoginStatus().
-	function statusChangeCallback(response) {
-		console.log('statusChangeCallback');
-		console.log(response);
+		// This is called with the results from from FB.getLoginStatus().
+		function statusChangeCallback(response) {
+			console.log('statusChangeCallback');
+			console.log(response);
 
-		if (response.status === 'connected') {
+			if (response.status === 'connected') {
 
-			var accessToken = response.authResponse.accessToken;
-			// Logged into your app and Facebook.
-			getInfo();
-		} else {
-			// The person is not logged into your app or we are unable to tell.
-			window.top.location = "/";
-			document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
-		}
-	}
-
-	function checkLoginState() {
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
-		});
-	}
-
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId: 203968780201183,
-			cookie: true, // enable cookies to allow the server to access
-			// the session
-			xfbml: true, // parse social plugins on this page
-			version: 'v2.12', // use graph api version 2.8
-			autoLogAppEvents: true,
-			//  status 	 : true /* reduces time wasted in checking if the user is logged in or not */
-		});
-
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
-		});
-	};
-
-	// Load the SDK asynchronously
-	(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "https://connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-
-	function getInfo(userID) {
-		FB.api('/me', 'GET', {
-			fields: 'id'
-		}, function(response) {
-			var startPos;
-			var geoOptions = {
-				timeout: 10 * 1000
+				var accessToken = response.authResponse.accessToken;
+				// Logged into your app and Facebook.
+				getInfo();
+			} else {
+				// The person is not logged into your app or we are unable to tell.
+				window.top.location = "/";
+				document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
 			}
+		}
 
-			var geoSuccess = function(position) {
-				startPos = position;
-				var toSend = {
-					"id": response.id,
-					"latitude": startPos.coords.latitude,
-					"longitude": startPos.coords.latitude,
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: 203968780201183,
+				cookie: true, // enable cookies to allow the server to access
+				// the session
+				xfbml: true, // parse social plugins on this page
+				version: 'v2.12', // use graph api version 2.8
+				autoLogAppEvents: true,
+				//  status 	 : true /* reduces time wasted in checking if the user is logged in or not */
+			});
+
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		};
+
+		// Load the SDK asynchronously
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function getInfo(userID) {
+			FB.api('/me', 'GET', {
+				fields: 'id'
+			}, function(response) {
+				var startPos;
+				var geoOptions = {
+					timeout: 10 * 1000
 				}
-				$.post("/send-location", toSend, function(data) {
-					console.log(data);
-				}, "json");
-			};
-			var geoError = function(error) {
-				console.log('Error occurred. Error code: ' + error.code);
-				// error.code can be:
-				//   0: unknown error
-				//   1: permission denied
-				//   2: position unavailable (error response from location provider)
-				//   3: timed out
-			};
-			navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-		});
-	}
 
+				// send location
+				var geoSuccess = function(position) {
+					startPos = position;
+					var toSend = {
+						"id": response.id,
+						"latitude": startPos.coords.latitude,
+						"longitude": startPos.coords.latitude,
+					}
+					$.post("/send-location", toSend, function(data) {
+						console.log(data);
+					}, "json");
+				};
+				var geoError = function(error) {
+					console.log('Error occurred. Error code: ' + error.code);
+					// error.code can be:
+					//   0: unknown error
+					//   1: permission denied
+					//   2: position unavailable (error response from location provider)
+					//   3: timed out
+				};
+				navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+
+				// get nearby users
+				$.ajax({
+					url: "/get-nearby",
+					type: "GET",
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader("id", response.id);
+					},
+					success: function(data) {
+						// console.log('get nearby result:', data);
+						var toSet;
+						for (i = 0; i < data.length; i++) {
+							console.log(data[i]);
+						}
+					}
+				})
+			});
+		}
 	</script>
 
 	<!-- Ocdptional JavaScript -->
