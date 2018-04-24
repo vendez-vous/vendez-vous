@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "^4.16.3",
@@ -35,15 +36,25 @@
   "homepage": "https://github.com/vendez-vous/vendez-vous#readme",
   "description": ""
 =======
+=======
+>>>>>>> parent of ce151e3... refactoring everything
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "mongodb": "^3.0.6",
     "mongoose": "^5.0.14",
+<<<<<<< HEAD
     "nodemon": "^1.17.3"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"
   },
+=======
+    "nodemon": "^1.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+>>>>>>> parent of ce151e3... refactoring everything
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vendez-vous/vendez-vous-server.git"
@@ -55,5 +66,8 @@
     "url": "https://github.com/vendez-vous/vendez-vous-server/issues"
   },
   "homepage": "https://github.com/vendez-vous/vendez-vous-server#readme"
+<<<<<<< HEAD
+>>>>>>> parent of ce151e3... refactoring everything
+=======
 >>>>>>> parent of ce151e3... refactoring everything
 }
