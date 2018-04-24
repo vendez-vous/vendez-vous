@@ -10,6 +10,7 @@
 	<meta name="HandheldFriendly" content="True">
 	<!-- meta tag for favicon-->
 	<link rel="shortcut icon" href="/favicon.png">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Gugi|Indie+Flower">
@@ -25,7 +26,8 @@
 			font-size: 64px;
 			font-family: 'Indie Flower', sans-serif;
 			text-align: center;
-			background-color: rgb(124, 124, 224);
+			/* background-color: rgb(124, 124, 224); */
+			background-color: black;
 			color: white;
 			margin: 0;
 		}
@@ -62,10 +64,10 @@
 			padding-left: 5px;
 		}
 
-		button {
+		/* button {
 			background-color: transparent;
 			border-color: black;
-		}
+		} */
 	</style>
 </head>
 
@@ -75,8 +77,8 @@
 	</div>
 	<br>
 	<div class="buttons">
-		<button onclick="location.href='/nearby'" type="button">Users Nearby</button>
-		<button onclick="javascript:logout();">Logout from Facebook</button>
+		<button class="w3-button w3-black" onclick="location.href='/nearby'" type="button">Users Nearby</button>
+		<button class="w3-button w3-black" onclick="javascript:logout();">Logout from Facebook</button>
 	</div>
 
 	<div class="subheadings">
@@ -102,7 +104,7 @@
 		</div>
 
 		<div class="button">
-			<button onclick="javascript:saveData();">save</button>
+			<button class="w3-button w3-black" onclick="javascript:saveData();">Save</button>
 		</div>
 		<!-- </form> -->
 	</div>

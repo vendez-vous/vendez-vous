@@ -17,6 +17,7 @@
 	<meta property="og:description" content="The app that lets you network over meals, based on your conversation interests." />
 	<!-- meta tag for favicon-->
 	<link rel="shortcut icon" href="/favicon.png">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<!-- Adding Google Font API -->
@@ -33,16 +34,22 @@
 			font-size: 64px;
 			font-family: 'Indie Flower', sans-serif;
 			text-align: center;
-			background-color: rgb(124, 124, 224);
+			/* background-color: rgb(124, 124, 224); */
+			background-color: black;
 			color: white;
 			margin: 0;
 		}
 
 		h2 {
 			text-align: center;
+			background-color: black;
+			color: white;
 		}
 
-		button {}
+		.fb-login-button {
+			float: right;
+			margin: 250px 100px 0 400px;
+		}
 	</style>
 </head>
 
@@ -59,9 +66,11 @@
 		<h3></h3>
 	</div>
 
-	<div class="login-button">
+	<!-- <div class="login-button">
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-	</div>
+	</div> -->
+
+	<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
 
 	<script>
 		// This is called with the results from from FB.getLoginStatus().
@@ -79,7 +88,7 @@
 				window.top.location = "/nearby";
 			} else {
 				// The person is not logged into your app or we are unable to tell.
-				document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
+				// document.getElementById('status').innerHTML = 'Please login with Facebook to continue';
 			}
 		}
 
