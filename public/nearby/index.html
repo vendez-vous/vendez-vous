@@ -297,6 +297,9 @@
 					},
 					success: function(data) {
 						// console.log('get nearby result:', data);
+						if(data.length == 0) {
+							return;
+						}
 						// populate all nearby users
 						var toSet = "<div class=\"row\">";
 						for (i = 0; i < data.length; i++) {
