@@ -182,21 +182,20 @@
 				var toSend = {
 					"id": response.id
 				}
-				console.log("getting the profile from the server");
 				/*$.get("/get-profile", function(data) {
 					document.getElementById("about").value = data.bio;
 					document.getElementById("interests").value = data.interests;
 				}, "json");*/
 				$.ajax({
 					url: "/get-profile",
-					data: {"bio": bio, "interests": interests},
+					// data: {"bio": bio, "interests": interests},
 					type: "GET",
 					beforeSend: function(xhr) {
-						xhr.setRequestHeader("id": response.id);
+						xhr.setRequestHeader("id", response.id);
 					},
-					success: function() {
-						document.getElementById("about").value = bio;
-						document.getElementById("interests").value = interests;
+					success: function(data) {
+						document.getElementById("about").value = data.bio;
+						document.getElementById("interests").value = data.interests;
 					}
 				})
 			});

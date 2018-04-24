@@ -113,7 +113,6 @@ app.post('/update-profile', (req, res) => {
 });
 
 app.get('/get-profile', (req, res) => {
-  console.log(req.headers);
   var user = {
     "_id": req.headers.id
   };
