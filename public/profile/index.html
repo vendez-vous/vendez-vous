@@ -42,7 +42,6 @@
 			width: 100px;
 			height: 100px;
 			margin-left: 100px;
-			border-color: black;
 		}
 
 		textarea {
@@ -81,9 +80,8 @@
 		<!-- <form action="/update-profile"> -->
 		<div class="name">
 			<h2>Name</h2>
-			<div id="profilepic">
-				<input type="text" id="name" readonly>
-			</div>
+			<input type="text" id="name" readonly>
+			<div id="profilepic"></div>
 			<br><br>
 		</div>
 
@@ -121,6 +119,7 @@
 			window.top.location = "/";
 			document.getElementById('name').value = 'your name displayed here';
 		}
+	}
 
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -173,7 +172,7 @@
 			});
 		}
 
-		function getInfo(userID) {
+		function getInfo() {
 			FB.api('/me', 'GET', {
 				fields: 'id,name,picture.width(150).height(150)'
 			}, function(response) {
