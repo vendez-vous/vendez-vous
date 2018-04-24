@@ -36,11 +36,11 @@
 			border: 5px solid #000000;
 			padding: 20px;
 		}
-		
-		.subheadings .name #profilepic {
+
+		.subheadings .name img {
 			display: inline;
-			/* width: 100px; */
-			/* height: 100px; */
+			width: 100px;
+			height: 100px;
 			margin-left: 100px;
 		}
 
@@ -78,8 +78,8 @@
 
 	<div class="subheadings">
 		<!-- <form action="/update-profile"> -->
-		<h2>Name</h2>
 		<div class="name">
+			<h2>Name</h2>
 			<input type="text" id="name" readonly>
 			<div id="profilepic"></div>
 			<br><br>
@@ -174,11 +174,31 @@
 
 		function getInfo(userID) {
 			FB.api('/me', 'GET', {
-				fields: 'name,picture.width(150).height(150)'
+				fields: 'id,name,picture.width(150).height(150)'
 			}, function(response) {
-				console.log("setting the name");
+				// console.log("setting the name");
 				document.getElementById("name").value = response.name;
 				document.getElementById("profilepic").innerHTML = "<img src='" + response.picture.data.url + "'>"
+				var toSend = {
+					"id": response.id
+				}
+				console.log("getting the profile from the server");
+				/*$.get("/get-profile", function(data) {
+					document.getElementById("about").value = data.bio;
+					document.getElementById("interests").value = data.interests;
+				}, "json");*/
+				$.ajax({
+					url: "/get-profile",
+					data: {"bio": bio, "interests": interests},
+					type: "GET",
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader("id": response.id);
+					},
+					success: function() {
+						document.getElementById("about").value = bio;
+						document.getElementById("interests").value = interests;
+					}
+				})
 			});
 		}
 	</script>
