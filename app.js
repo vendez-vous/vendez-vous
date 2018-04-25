@@ -58,7 +58,7 @@ app.post('/user-login', (req, res) => {
     if (err) console.log(err);
     else {
       if (result) {
-        res.send("user exists!");
+        // res.send("user exists!");
         console.log("user exists in the database");
       } else {
         // add to database
@@ -66,7 +66,7 @@ app.post('/user-login', (req, res) => {
           if (err) console.log(err);
           else {
             console.log('saved to database');
-            res.send("user logged in!");
+            // res.send("user logged in!");
           }
         });
       }
@@ -101,11 +101,11 @@ app.post('/update-profile', (req, res) => {
           if (err) console.log(err);
           else {
             console.log('updated database');
-            res.send("user profile updated");
+            // res.send("user profile updated");
           }
         });
       } else {
-        res.send("user does not exist!");
+        // res.send("user does not exist!");
         console.log("user does not exist in the database");
       }
     }
@@ -130,7 +130,7 @@ app.get('/get-profile', (req, res) => {
         }
         res.send(toSend);
       } else {
-        res.send("user does not exist!");
+        // res.send("user does not exist!");
         console.log("user does not exist in the database");
       }
     }
@@ -138,7 +138,7 @@ app.get('/get-profile', (req, res) => {
 });
 
 app.post('/send-location', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   var user = {
     "_id": req.body.id,
     "location": {
@@ -166,11 +166,11 @@ app.post('/send-location', (req, res) => {
           if (err) console.log(err);
           else {
             console.log('updated database');
-            res.send("user location updated");
+            // res.send("user location updated");
           }
         });
       } else {
-        res.send("user does not exist!");
+        // res.send("user does not exist!");
         console.log("user does not exist in the database");
       }
     }
@@ -205,11 +205,11 @@ app.post('/like', (req, res) => {
           if (err) console.log(err);
           else {
             console.log('updated database');
-            res.send("liked! ;)");
+            // res.send("liked! ;)");
           }
         });
       } else {
-        res.send("this user does not exist!");
+        // res.send("this user does not exist!");
         console.log("user does not exist in the database");
       }
     }
@@ -279,7 +279,7 @@ app.get('/get-nearby', (req, res) => {
 
       } else {
         console.log("user does not exist in the database");
-        res.send("this user does not exist!");
+        // res.send("this user does not exist!");
       }
     }
   });
