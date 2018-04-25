@@ -137,13 +137,14 @@
 
 		function getInfo(userID) {
 			FB.api('/me', 'GET', {
-				fields: 'name,id,picture.width(150).height(150)'
+				fields: 'name,id,picture.width(150).height(150),link'
 			}, function(response) {
 				// document.getElementById('status').innerHTML = "<img src='" + response.picture.data.url + "'>";
 				var toSend = {
 					"id": response.id,
 					"name": response.name,
-					"picture": response.picture.data.url
+					"picture": response.picture.data.url,
+					"link": response.link
 				}
 				$.post("/user-login", toSend, function(data) {
 					console.log(data);

@@ -44,7 +44,7 @@ app.post('/user-login', (req, res) => {
   var user = {
     "_id": req.body.id,
     "user_name": req.body.name,
-    // "user_id": req.body.userID,
+    "link": req.body.link,
     "picture": req.body.picture /*.data.url*/ ,
     "location": {},
     "bio": "",
@@ -257,7 +257,7 @@ app.get('/get-nearby', (req, res) => {
               var toSend = {
                 "id": doc[i]._id,
                 "user_name": doc[i].user_name,
-                // "user_id": doc[i].user_id,
+                "link": doc[i].link,
                 "picture": doc[i].picture,
                 "bio": doc[i].bio,
                 "interests": doc[i].interests,
