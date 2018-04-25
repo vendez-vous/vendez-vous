@@ -9,7 +9,7 @@
 	<!-- meta tag to make the website Search Engine friendly-->
 	<meta name="HandheldFriendly" content="True">
 	<!-- meta tag to refresh page after every 30 seconds -->
-	<meta http-equiv="refresh" content="30">
+	<meta http-equiv="refresh" content="90">
 	<!-- link for favicon-->
 	<link rel="shortcut icon" href="/favicon.png">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -316,9 +316,12 @@
 							toSet += "<span class=\"about\"><b>About</b></span>";
 							toSet += "<span class=\"about\">" + data[i].bio + "</span>"; // set user bio
 							toSet += "</div><ul class=\"social\"><li>";
-							toSet += "<a onclick=\"javascript:like(" + data[i].id + ");\"><i class=\"far fa-heart\"></i></a>"; // make like btn
-							toSet += "</li><li>";
-							toSet += "<a href=\"#\"><i class=\"far fa-comments\"></i></a>"; // make msg btn
+							if(data[i].match == true) {
+								toSet += "<a href=\"https://www.facebook.com/profile.php?id=" + data[i].id + "\" target=\"_blank\"><i class=\"far fa-comments\"></i></a>"; // make msg btn
+							}
+							else {
+								toSet += "<a onclick=\"javascript:like(" + data[i].id + ");\"><i class=\"far fa-heart\"></i></a>"; // make like btn
+							}
 							toSet += "</li></ul></div></div>";
 						}
 						toSet += "</div>";
