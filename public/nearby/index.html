@@ -318,7 +318,7 @@
 							toSet += "<span class=\"about\">" + data[i].bio + "</span>"; // set user bio
 							toSet += "</div><ul class=\"social\"><li>";
 							if(data[i].match == true) {
-								toSet += "<a href=\"mailto:" + data[i].link + "\" target=\"_blank\"><i class=\"far fa-envelope\"></i></a>"; // make msg btn
+								toSet += "<a href=\"mailto:" + data[i].email + "\" target=\"_blank\"><i class=\"far fa-envelope\"></i></a>"; // make msg btn
 							}
 							else {
 								toSet += "<a onclick=\"javascript:like(" + data[i].id + ");\"><i class=\"far fa-heart\"></i></a>"; // make like btn
