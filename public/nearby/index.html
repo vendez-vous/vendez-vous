@@ -256,8 +256,9 @@
 
 		function getInfo(userID) {
 			FB.api('/me', 'GET', {
-				fields: 'id'
+				fields: 'id,permission'
 			}, function(response) {
+				console.log(response);
 				var startPos;
 				var geoOptions = {
 					timeout: 10 * 1000
