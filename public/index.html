@@ -150,6 +150,18 @@
 				$.post("/user-login", toSend, function(data) {
 					console.log(data);
 				}, "json");
+				/*$.ajax({
+					url: "/user-login",
+					type: "POST",
+					data: toSend,
+					success: function(data) {
+						console.log(data);
+					},
+					dataType: "json",
+					async: false
+				}).done(function() {
+					console.log("done logging in");
+				});*/
 			});
 		}
 	</script>

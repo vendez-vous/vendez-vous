@@ -275,6 +275,17 @@
 					$.post("/send-location", toSend, function(data) {
 						console.log(data);
 					}, "json");
+
+					/*$.ajax({
+						url: "/send-location",
+						type: "POST",
+						data: toSend,
+						success: function(data) {
+							console.log(data);
+						},
+						dataType: "json",
+						async: false
+					})*/
 				};
 
 				var geoError = function(error) {
@@ -297,7 +308,7 @@
 					},
 					success: function(data) {
 						// console.log('get nearby result:', data);
-						if(data.length == 0) {
+						if (data.length == 0) {
 							$(".container").html("<div class=\"alert alert-dark\" role=\"alert\" align=\"center\">No nearby users! Please come back later.</div>");
 							return;
 						}
@@ -305,7 +316,7 @@
 						var toSet = "<div class=\"row\">";
 						for (i = 0; i < data.length; i++) {
 							console.log(data[i]);
-							if((i > 0) && (i % 4 == 0)) {
+							if ((i > 0) && (i % 4 == 0)) {
 								toSet += "</div><br><div class=\"row\">";
 							}
 							toSet += "<div class=\"col-md-3 col-sm-6\"><div class=\"person\"><div class=\"pic\">";
@@ -317,10 +328,9 @@
 							toSet += "<span class=\"about\"><b>About</b></span>";
 							toSet += "<span class=\"about\">" + data[i].bio + "</span>"; // set user bio
 							toSet += "</div><ul class=\"social\"><li>";
-							if(data[i].match == true) {
+							if (data[i].match == true) {
 								toSet += "<a href=\"mailto:" + data[i].email + "\"><i class=\"far fa-envelope\"></i></a>"; // make msg btn
-							}
-							else {
+							} else {
 								toSet += "<a onclick=\"javascript:like(" + data[i].id + ");\"><i class=\"far fa-heart\"></i></a>"; // make like btn
 							}
 							toSet += "</li></ul></div></div>";
