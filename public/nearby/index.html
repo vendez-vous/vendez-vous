@@ -298,6 +298,7 @@
 					success: function(data) {
 						// console.log('get nearby result:', data);
 						if(data.length == 0) {
+							$(".container").html("<div class=\"alert alert-dark\" role=\"alert\" align=\"center\">No nearby users! Please come back later.</div>");
 							return;
 						}
 						// populate all nearby users

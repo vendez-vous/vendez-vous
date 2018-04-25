@@ -46,7 +46,7 @@
 		}
 
 		.subheadings .name img {
-			float:right;
+			float: right;
 			width: 130px;
 			height: 130px;
 		}
@@ -104,24 +104,31 @@
 			<button class="w3-button w3-black" onclick="javascript:saveData();">Save</button>
 		</div>
 		<!-- </form> -->
+		<br>
+		<div id="status">
+
+		</div>
+
 	</div>
 
+
+
 	<script>
-	function statusChangeCallback(response) {
-		console.log('statusChangeCallback');
-		console.log(response);
+		function statusChangeCallback(response) {
+			console.log('statusChangeCallback');
+			console.log(response);
 
-		if (response.status === 'connected') {
+			if (response.status === 'connected') {
 
-			var accessToken = response.authResponse.accessToken;
-			// Logged into your app and Facebook.
-			getInfo();
-		} else {
-			// The person is not logged into your app or we are unable to tell.
-			window.top.location = "/";
-			document.getElementById('name').value = 'your name displayed here';
+				var accessToken = response.authResponse.accessToken;
+				// Logged into your app and Facebook.
+				getInfo();
+			} else {
+				// The person is not logged into your app or we are unable to tell.
+				window.top.location = "/";
+				document.getElementById('name').value = 'your name displayed here';
+			}
 		}
-	}
 
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -172,6 +179,8 @@
 					}, "json");
 				}
 			});
+			console.log("trying to make alert popup");
+			document.getElementById('status').innerHTML = "<div class=\"alert alert-light alert-dismissible fade show\" role=\"alert\">	<strong>Success!</strong> Your response was recorded.	<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> <span aria-hidden=\"true\">&times;</span> </button> </div>";
 		}
 
 		function getInfo() {
