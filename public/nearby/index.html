@@ -316,7 +316,7 @@
 							toSet += "<span class=\"about\"><b>About</b></span>";
 							toSet += "<span class=\"about\">" + data[i].bio + "</span>"; // set user bio
 							toSet += "</div><ul class=\"social\"><li>";
-							toSet += "<a href=\"#\"><i class=\"far fa-heart\"></i></i></a>"; // make like btn
+							toSet += "<a onclick=\"javascript:like(" + data[i].id + ");\"><i class=\"far fa-heart\"></i></a>"; // make like btn
 							toSet += "</li><li>";
 							toSet += "<a href=\"#\"><i class=\"far fa-comments\"></i></a>"; // make msg btn
 							toSet += "</li></ul></div></div>";
@@ -327,6 +327,21 @@
 						$(".container").html(toSet);
 					}
 				})
+			});
+		}
+
+		function like(other_user) {
+			FB.getLoginStatus(function(response) {
+				if (response && response.status === 'connected') {
+					var user_id = response.authResponse.userID
+					var toSend = {
+						"id": user_id,
+						"other": other_user
+					}
+					$.post("/like", toSend, function(data) {
+						console.log(data);
+					}, "json");
+				}
 			});
 		}
 	</script>

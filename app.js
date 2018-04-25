@@ -191,7 +191,9 @@ app.post('/like', (req, res) => {
       if (result) {
         // update database
         var matches_copy = result.matches.slice()
-        matches_copy.push(user._id);
+        if (!matches_copy.includes(user._id)) {
+          matches_copy.push(user._id);
+        }
         db.collection('users').update({
           "_id": user.other_user
         }, {
