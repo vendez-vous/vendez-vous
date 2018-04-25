@@ -321,7 +321,7 @@
 								toSet += "<a href=\"mailto:" + data[i].email + "\"><i class=\"far fa-envelope\"></i></a>"; // make msg btn
 							}
 							else {
-								toSet += "<a onclick=\"javascript:like(" + data[i].id + ");\"><i class=\"far fa-heart\"></i></a>"; // make like btn
+								toSet += "<a onclick=\"javascript:like(" + data[i].id + "); alert(\'Liked!\');\"><i class=\"far fa-heart\"></i></a>"; // make like btn
 							}
 							toSet += "</li></ul></div></div>";
 						}
